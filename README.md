@@ -4,11 +4,9 @@
 A framework agnostic simple and lightweight way to create and reuse routes on web apps.
 
 **IMPORTANT:** This **isn't** a router like `vue-router` or `react-router`. Smart Routes just brings a simplified and safer way to declare and reuse routes.
-<br />
-<br />
+
 
 ## Motivation
----
 As our web application grow, its amount of routes grows too. Apps with 20, 30, 40 and more routes variations can be really messy to deal with, even more when we add dynamic routing. 
 
 That kind of thing came with some problems like:
@@ -19,26 +17,19 @@ That kind of thing came with some problems like:
 
 A routes single source of truth allows to better organize your routes, better use them and prevent routing mistakes.
 
-<br />
-<br />
 
 ## Install
----
 ### npm
 ```
 npm install smart-routes
 ```
-
 ### yarn
 ```
 yarn add smart-routes
 ```
-<br />
-<br />
+
 
 ## Basic usage
----
-
 Import `Route` from the package
 ```
 import { Route } from 'smart-routes';
@@ -61,17 +52,14 @@ Defining route
 Link like this
 
 ```jsx
-<Link to={routes.user().exec()}> // Leads to /user
+// Leads to /user
+<Link to={routes.user().exec()}> 
   // ...
 </Link>
 ```
 
-<br />
-<br />
 
 ## Route parameters
----
-
 ```js
 const routes = {
   user: new Route('user', ':userId')
@@ -92,11 +80,8 @@ const someUserId = 123;
 </Link>
 ```
 
-<br />
-<br />
 
 ## Subroutes
-
 ```js
 const routes = {
   user: new Route('user', {
@@ -116,10 +101,8 @@ const routes = {
 </Link>
 ```
 
+
 ## Complete example
-
----
-
 ```js
 const routes = {
   user: new Route('user', ':userId' {
