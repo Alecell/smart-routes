@@ -67,7 +67,7 @@ const routes = {
 ```
 
 ```jsx
-//  routes.user() = /user/:userId
+//  `routes.user().exec()` leads to /user/:userId
 <Route path={routes.user().exec()} component={SomeComponent} />
 ```
 
