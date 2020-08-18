@@ -1,13 +1,23 @@
 {
   "name": "smart-routes",
-  "version": "0.0.5",
-  "description": "A simple and lightweight module to allow reuse routes",
+  "version": "0.0.6",
+  "description": "A framework agnostic simple and lightweight way to create and reuse routes on web apps.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "prepublish": "tsc",
   "scripts": {
     "build": "tsc"
   },
+  "keywords": [
+    "routing",
+    "routes",
+    "router",
+    "react-router",
+    "react",
+    "vue",
+    "angular",
+    "organize"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Alecell/smart-routes"
