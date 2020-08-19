@@ -105,7 +105,7 @@ const routes = {
 ## Complete example
 ```js
 const routes = {
-  user: new Route('user', ':userId' {
+  user: new Route('user', ':userId', {
     info: new Route('info'),
     cart: new Route('cart', {
       item: new Route('item', ':itemId')
