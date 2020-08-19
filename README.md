@@ -145,7 +145,7 @@ const routes = {
 </Link>
 
 // Leads to /user/123/cart/item/456
-<Link to={routes.user(123).item(456).exec()}> 
+<Link to={routes.user(123).cart().item(456).exec()}> 
   // ...
 </Link>
 ```
