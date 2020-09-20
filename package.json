@@ -1,6 +1,6 @@
 {
   "name": "smart-routes",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "A framework agnostic simple and lightweight way to create and reuse routes on web apps.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

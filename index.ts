@@ -1,53 +1,79 @@
-import { isNumber, isString } from 'util';
+import { isNull } from "./utils/isNull";
+import { isString } from "./utils/isString";
 
-let path = '';
+type Argument = number | string;
 
-const applyParams = (route: string, param: number | string, paramName: string): string => {
-  let parsedRoute = '';
+type RouteChildren = Record<string, any>;
 
-  if (!param && !paramName) {
-    parsedRoute += route;
-  } else if (!param && paramName) {
-    const temp = `${route}/${paramName}`;
-    parsedRoute += temp;
-  } else if (param && !paramName) {
-    const temp = `${route}/${paramName}`;
-    parsedRoute += temp;
-  } else if (param && paramName) {
-    let temp = `${route}/${param}`;
-    parsedRoute += temp;
-  }
-
-  return parsedRoute;
-};
+interface RouteProps {
+  [key: string]: any;
+  path: string;
+  paramName: string | null;
+  basePath: string;
+}
 
 const Route = function (
-  this: any,
-  route: string,
-  childrenOrParam?: any | string,
-  children?: any,
+  this: RouteProps,
+  path: string,
+  paramOrChildren: string | RouteChildren,
+  children?: RouteChildren,
 ) {
-  this.route = `/${route}`;
+  this.path = path;
+  this.paramName = isString(paramOrChildren) 
+    ? paramOrChildren as RouteProps['paramName'] 
+    : null;
+  this.basePath = '';
 
-  if (isNumber(childrenOrParam) || isString(childrenOrParam)) {
-    this.param = childrenOrParam as string;
-    this.children = children as any;
-  } else {
-    this.children = childrenOrParam as any;
-  }
+  const updateChildren = (basePath: string): void => {
+    const paths = isString(paramOrChildren) 
+      ? children as RouteChildren 
+      : paramOrChildren as RouteChildren;
 
-  return (param: string | number) => {
-    path += applyParams(this.route, param, this.param);
-
-    return {
-      ...this.children,
-      exec: () => {
-        const temp = path;
-        path = '';
-        return temp;
-      },
-    };
+    if (paths) {
+      Object.keys(paths).forEach((key) => {
+        paths[key]().setBase(basePath);
+        this[key] = paths[key];
+      });
+    }
   };
+
+  const setBase = (base: string): void => {
+    this.basePath = base;
+  };
+
+  const getArgPath = (arg: Argument): string => {
+    let argPath = '';
+
+    if (arg && !isNull(this.paramName)) {
+      argPath = `/${arg}`;
+    } 
+    else if (!arg && !isNull(this.paramName)) {
+      argPath = `/${this.paramName}`;
+    } 
+    else if (arg && isNull(this.paramName)) {
+      throw new Error(`Unexpected value \`${arg}\` provided to not parameterized route`);
+    }
+
+    return argPath;
+  };
+
+  const getPath = (arg: Argument): string => {
+    let newPath = `${this.basePath}${this.path}`;
+
+    newPath += getArgPath(arg);
+
+    updateChildren(newPath);
+
+    return newPath;
+  };
+
+  updateChildren(this.path);
+
+  return (arg: Argument = '') => ({
+    ...this,
+    path: getPath(arg),
+    setBase,
+  });
 } as any;
 
 export {
