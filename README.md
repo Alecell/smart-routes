@@ -40,7 +40,7 @@ Crete your route
 
 ```js
 const routes = {
-  user: new Route('user')
+  user: new Route('/user')
 }
 ```
 
