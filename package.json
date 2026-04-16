@@ -1,22 +1,28 @@
 {
   "name": "smart-routes",
-  "version": "1.0.3",
-  "description": "A framework agnostic simple and lightweight way to create and reuse routes on web apps.",
+  "version": "2.1.0",
+  "description": "A framework agnostic, strongly-typed way to centralize and reuse routes on web apps.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "prepublish": "tsc",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "routing",
     "routes",
     "router",
-    "react-router",
+    "typescript",
+    "type-safe",
     "react",
     "vue",
-    "angular",
-    "organize"
+    "angular"
   ],
   "repository": {
     "type": "git",
@@ -25,8 +31,8 @@
   "author": "Alecell",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^14.6.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
   }
 }

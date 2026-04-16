@@ -1,15 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2015",
     "module": "commonjs",
-    "lib": ["es2017", "es7", "es6", "dom"],
+    "lib": ["ES2017", "DOM"],
     "declaration": true,
     "outDir": "dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
+  "include": ["index.ts"],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "tests",
+    "examples"
   ]
 }
